@@ -30,7 +30,7 @@ def getLinks(url, pageList):
   return linkList
 
 pageList = []
-while pageList.size() < 50000:
+while pageList.size() < 10:
   allLinks = []
   url = "https://www.reddit.com"
   allLinks += getLinks(url, allLinks)
