@@ -1,4 +1,5 @@
 #import scrapy #possible crawler/scraper to use
+#This is mostly bum code
 from urllib.request import urlopen
 
 class page:
