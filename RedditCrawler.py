@@ -91,8 +91,8 @@ def sort(pageLst):
   #Number of components (numNodes + numEdges)
   #top 5 for Betweenness Centrality (In the most paths between nodes)
   #average path length
-  #Graph of in-degree out-degree from assignment 1 (export as CSV and put in excel)
-  #100 highest page rank nodes
+  #Graph of in-degree out-degree from assignment 1 (export as CSV and put in excel) (requires numIncoming)
+  #100 highest page rank nodes (requires incomingLinks as a list and numOutgoing)
 
 
 
