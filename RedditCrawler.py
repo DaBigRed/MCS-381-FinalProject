@@ -79,7 +79,7 @@ def sort(pageLst):
       
 #Things we should do while scraping
   #find outgoing links
-  #find diameter
+  #find diameter`
 #Kind of a second step
   #Store URL and it's outgoing links in a dictionary
 #Things for later
@@ -91,7 +91,7 @@ def sort(pageLst):
   #Number of components (numNodes + numEdges)
   #top 5 for Betweenness Centrality (In the most paths between nodes)
   #average path length
-  #Graph of in-degree out-degree from assignment 1 (export as CSV and put in excel) (requires numIncoming)
+  #Graph of in-degree out-degree from assignment 1 (export as CSV and put in excel) (requires numIncoming(I think))
   #100 highest page rank nodes (requires incomingLinks as a list and numOutgoing)
 
 
