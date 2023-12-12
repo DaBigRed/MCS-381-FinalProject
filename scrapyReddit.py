@@ -1,5 +1,5 @@
 import scrapy
-from mcs381final.items import RedditPostItem
+from mcs381final.items import RedditClassItem
 
 #this will help us parse urls better by allowing us to chop them up
 from urllib.parse import urlparse
@@ -40,36 +40,36 @@ class RedditSpider(scrapy.Spider):
 				item['links_from'][index] = "https://www.reddit.com" + item['links_from'][index]
 
 		#iterates through items to make links out of things that only start with /
-		for index in range(len(item.links_from)):
-			if item.links_from[index].startswith('/'):
-				item.links_from[index] = "https://www.reddit.com" + item.links_from[index]
+		for index in range(len(item['links_from'])):
+			if item['links_from'][index].startswith('/'):
+				item['links_from'][index] = "https://www.reddit.com" + item['links_from'][index]
 
 		#define a list to hold all links that need to be deleted
 		delete_list = []
 
 		#add links to delete_list
-		for index in range(len(item.links_from)):	
+		for index in range(len(item['links_from'])):	
 
 			#gets all the bad links
-			if item.links_from[index].startswith('#'): 
-				delete_list.append(item.links_from[index])
+			if item['links_from'][index].startswith('#'): 
+				delete_list.append(item['links_from'][index])
 			#gets all the external links
-			elif not item.links_from[index].startswith('https://www.reddit.com'):
-				delete_list.append(item.links_from[index])
+			elif not item['links_from'][index].startswith('https://www.reddit.com'):
+				delete_list.append(item['links_from'][index])
 			else: continue
 
 		#delete nodes
 		for link in delete_list:
-			item.links_from.remove(link)
+			item['links_from'].remove(link)
 
 		#here we are adding edges from the current node in the adjacency graph
-		if item.node_id not in self.graph:
-			self.graph[item.node_id] = set()
-		for link in item.links_from:
-			self.graph[item.node_id].add(link)
+		if item['node_id'] not in self.graph:
+			self.graph[item['node_id']] = set()
+		for link in item['links_from']:
+			self.graph[item['node_id']].add(link)
 
 		#here we are following the links we have stored to parse new reddit posts
-		for link in item.links_from:
+		for link in item['links_from']:
 			if self.page_limit > 0:
 				yield scrapy.Request(url=link, callback=self.parse)
 				self.layers += 1
