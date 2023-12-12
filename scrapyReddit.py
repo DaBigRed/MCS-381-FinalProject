@@ -8,6 +8,12 @@ class RedditSpider(scrapy.Spider):
 
 	name = "redditCrawler"
 	allowed_domains = ["reddit.com"]
+	page_limit = 100
+	#we will use an adjacency list to represent the graph
+	#which will be stored as a dictionary
+	graph = {}
+	#this is how many layers we have went to
+	layers = 1
 
 	def start_requests(self):
 
@@ -25,9 +31,6 @@ class RedditSpider(scrapy.Spider):
 		#names the node_id the current url of what we are parsing
 		item['node_id'] = response.url
 		
-		#gets the title of the reddit page
-		item['title'] = response.xpath('//embed-snippet-share-button[@postid="t3_18f8vzh"]/following::text()').get()
-
 		#gets the pages on reddit which the node links to (reccommended posts section)
 		item['links_from'] = response.css('a::attr(href)').getall()
 
@@ -58,4 +61,19 @@ class RedditSpider(scrapy.Spider):
 		#delete nodes
 		for link in delete_list:
 			item.links_from.remove(link)
-				
+
+		#here we are adding edges from the current node in the adjacency graph
+		if item.node_id not in self.graph:
+			self.graph[item.node_id] = set()
+		for link in item.links_from:
+			self.graph[item.node_id].add(link)
+
+		#here we are following the links we have stored to parse new reddit posts
+		for link in item.links_from:
+			if self.page_limit > 0:
+				yield scrapy.Request(url=link, callback=self.parse)
+				self.layers += 1
+				self.page_limit -= 1
+			else:
+				self.logger.info("Page limit reached. Stopping further extraction.")
+				break			
