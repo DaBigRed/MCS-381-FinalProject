@@ -14,9 +14,10 @@ def findPaths(data, node1, node2):
       #set new min
       min = len(path)
     #else if length is greater than max
-    else if(len(path) > max):
+  #will use this later, when calculating diameter.
+    #else if(len(path) > max):
       #set new max
-      max = len(path)
+      #max = len(path)
   for path in paths:
     #If a path's length is longer than the min
     if(len(path) != min):
