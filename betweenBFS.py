@@ -2,12 +2,15 @@ import json
 
 with open("graph.json", "r") as f:
   data = json.load(f)
-
+ 
+newKeys = []
 for key in data:
   for link in data[key]:
     if link not in data:
-      data[link] = []
-
+      newKeys.append(link)
+for link in newKeys:
+    data[link] = []
+      
 def bfs(graph, node1,node2):
   path_list = [[node1]]
   path_index = 0
