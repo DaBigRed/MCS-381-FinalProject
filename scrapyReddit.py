@@ -7,7 +7,7 @@ class RedditSpider(scrapy.Spider):
 
 	name = "redditCrawler2"
 	allowed_domains = ["reddit.com"]
-	page_limit = 50
+	page_limit = 500000
 	#we will use an adjacency list to represent the graph
 	#which will be stored as a dictionary
 	graph = {}
