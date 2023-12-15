@@ -3,8 +3,11 @@ import json
 with open("graph.json", "r") as f:
   data = json.load(f)
 
-visited = []
-queue = []
+for key in data:
+  for link in data[key]:
+    if link not in data:
+      data[key] = []
+
 def bfs(graph, node1,node2):
   path_list = [[node1]]
   path_index = 0
@@ -18,7 +21,7 @@ def bfs(graph, node1,node2):
     if node2 in next_nodes:
       current_path.append(node2)
       return current_path
-    if next_node in next_nodes:
+    for next_node in next_nodes:
       if not next_node in previous_nodes:
         new_path = current_path[:]
         new_path.append(next_node)
@@ -32,12 +35,13 @@ for node in data:
   dict[node] = 0
   for node1 in data:
     if node != node1:
-      paths.append(bfs(data, node, node1)
+      paths.append(bfs(data, node, node1))
 
 for path in paths:
-  for node in path:
-      dict[node] += 1
+  for index in range(len(path-2)):
+      dict[path[index+1]] += 1
 
 with open("betweenness.json", "w") as json_file:
   json.dump(dict, json_file)
+      
       
