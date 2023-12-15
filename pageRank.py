@@ -12,7 +12,7 @@ for key in data:
       data[key] = []
 
 for key in incoming:
-  for link in data[key]:
+  for link in incoming[key]:
     if link not in data:
       data[key] = []
 class pageRank:
@@ -21,7 +21,7 @@ class pageRank:
     self.incoming = incoming
     self.oldPR = 1.0/numNodes
     self.newPR = 0
-    self.repeating = false
+    self.repeating = False
     self.numNodes = numNodes
   def pageRankStep(self, dict):
     incomScore = 0
@@ -40,14 +40,14 @@ notAllRepeat = True
 accum = 0
 for key in incoming:
   dict[key] = pageRank(len(data[key]), incoming, numNodes)
-while (notAllRepeat) && (accum < 1000):
+while (notAllRepeat) & (accum < 1000):
   for key in dict:
     dict[key].pageRankStep(dict)
   for key in dict:
-    dict[key].endStep:
+    dict[key].endStep
   notAllRepeating = False
   for key in dict:
-    if !(dict[key].repeating): 
+    if not (dict[key].repeating): 
       notAllRepeating = True
 prDict = {}
 for key in dict:
