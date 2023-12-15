@@ -6,7 +6,7 @@ with open("graph.json", "r") as f:
 for key in data:
   for link in data[key]:
     if link not in data:
-      data[key] = []
+      data[link] = []
 
 def bfs(graph, node1,node2):
   path_list = [[node1]]
