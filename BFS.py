@@ -89,17 +89,11 @@ def main():
 	#now find the average path length
 	average_path = calculate_average_path_length(shortest_paths_dict)
 
-	#iterates through all the possible combinations of nodes and prints the
-	#shortest path length value for each one
-	for source, targets in shortest_paths_dict.items():
-		for target, length in targets.items():
-			print(f"Shortest path length from {source} to {target}: {length}")
-
 	###
 	#Important stuff
 	###
 
-	print("**********" * 100)
+	print("**********" * 10)
 
 	print("average path length: " + str(average_path))
 
