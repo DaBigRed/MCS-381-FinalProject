@@ -6,13 +6,19 @@ with open("graph.json", "r") as f:
 with open("incoming.json", "r") as fi:
   incoming = json.load(fi)
 
-numOut =  []
-numIn = []
+numOut =  {}
+numIn = {}
 
 for key in data:
-  numOut.append([key, len(data[key]]))
+  if len(data[key]) not in numOut:
+    numOut[len(data[key])] = 1
+  else:
+    numOut[len(data[key]] += 1
 for key in incoming:
-  numIn.append([key, len(incoming[key])])
+  if len(incoming[key] not in numIn:
+    numIn[len(incoming[key])] = 1
+  else:
+    numIn[len(incoming[key])] += 1
 
 header = ["url", "Number of Outgoing Links"]
 header2 = ["url", "Number of Incoming Links"]
