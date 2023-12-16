@@ -34,5 +34,7 @@ plots.py: Create a CSV file for InDegree and OutDegree Graphs.
 outDegree.csv: CSV output of OutDegree from plots.py.
 
 outDegree.png: graph made using outDegree.csv.
+
 inDegree.csv: CSV output of InDegree from plots.py
+
 inDegree.png: graph made using inDegree.csv
